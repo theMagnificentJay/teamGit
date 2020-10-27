@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 
 const Zomato = (props) => {
-  const [restNameOne, setRestNameOne] = useState("");
-  const [restCuisineOne, setRestCuisineOne] = useState("");
-  const [restNameTwo, setRestNameTwo] = useState("");
-  const [restCuisineTwo, setRestCuisineTwo] = useState("");
-  const [restNameThree, setRestNameThree] = useState("");
-  const [restCuisineThree, setRestCuisineThree] = useState("");
-  const [restNameFour, setRestNameFour] = useState("");
-  const [restCuisineFour, setRestCuisineFour] = useState("");
   const [restaurants, setRestraunts] = useState([]);
   const [toggle, setToggle] = useState(false);
 
@@ -27,26 +19,11 @@ const Zomato = (props) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          // const resturants = data.nearby_restaurants.slice(0, 5);
           setRestraunts(data.nearby_restaurants.slice(0, 3));
-          console.log(restaurants);
-          console.log(restaurants[0].restaurant.name);
-          // setRestNameOne(resturants[0].restaurant.name);
-          // setRestCuisineOne(resturants[0].restaurant.cuisines);
-          // setRestNameTwo(resturants[1].restaurant.name);
-          // setRestCuisineTwo(resturants[1].restaurant.cuisines);
-          // setRestNameThree(resturants[2].restaurant.name);
-          // setRestCuisineThree(resturants[2].restaurant.cuisines);
-          // setRestNameFour(resturants[3].restaurant.name);
-          // setRestCuisineFour(resturants[3].restaurant.cuisines);
         })
         .catch((err) => console.log(err));
     }
   };
-
-  // useEffect(() => {
-  //   fetchZomato();
-  // }, []);
 
   return (
     <div
@@ -73,7 +50,7 @@ const Zomato = (props) => {
                 <p key={index} style={{ textAlign: "center" }}>
                   <b>{place.restaurant.name}</b>
                 </p>
-                <p style={{ textAlign: "center" }}>
+                <p key={index} style={{ textAlign: "center" }}>
                   <i>{place.restaurant.cuisines}</i>
                 </p>
               </div>
@@ -84,6 +61,7 @@ const Zomato = (props) => {
         <></>
       )}
       <Button
+        className="btn btn-primary"
         onClick={(e) => {
           fetchZomato();
           setToggle(!toggle);

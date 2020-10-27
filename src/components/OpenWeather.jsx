@@ -5,7 +5,6 @@ const key = "be197d61a8d4d154bdb54d626e41a007";
 
 const OpenWeather = (props) => {
   const [weatherMain, setWeatherMain] = useState("");
-  // const [weatherSys, setWeatherSys] = useState("");
   const [weatherWeather, setWeatherWeather] = useState("");
   const [toggle, setToggle] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
@@ -19,7 +18,6 @@ const OpenWeather = (props) => {
       .then((res) => {
         console.log(res);
         setWeatherMain(res.main);
-        // setWeatherSys(res.sys);
         setWeatherWeather(res.weather);
       });
   };
