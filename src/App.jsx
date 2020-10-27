@@ -9,6 +9,7 @@ function App() {
   const [longitude, setLongitude] = useState(0);
   const [Toggle, setToggle] = useState(true);
   const [Toggle2, setToggle2] = useState(true);
+  // console.log(imageUrl);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -41,7 +42,7 @@ function App() {
           </Button>
         </div>
 
-        {/* <NASA latitude={latitude} longitude={longitude} /> */}
+        <NASA latitude={latitude} longitude={longitude} />
 
         {Toggle ? (
           <div id="openWeather" className="openWeather card">

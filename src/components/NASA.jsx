@@ -1,20 +1,39 @@
-// import React from 'react';
+import React, { useState, useEffect } from "react";
 
-// let key = `vuG7MCOAO8PDyiw8H7QWJULgngWRc9lv1eYeWzt1`
-// let baseURL = `https://api.nasa.gov/planetary/earth/assets?`;
-// let date = new Date().toISOString().split('T')[0]
+const baseURL = "https://api.nasa.gov/planetary/earth/assets";
+const key = "y3DUrejxMPFNOGtCKPo36l4yaBgHPoNb8kInsRLw";
 
-// function NASA(props) {
-//   const fetcherFunction = () => {
-//     fetch(`${baseURL}lon=${props.longitude}&lat=${props.lattitude}&date=${date}&api_key=${key}`)
-//   }
+const NASA = (props) => {
+  console.log(props.longitude);
+  console.log(props.latitude);
+  const [imageUrl, setImageUrl] = useState("");
 
-//   return (
+  const fetchResults = () => {
+    let url = `${baseURL}?lon=${props.longitude}&lat=${props.latitude}&cloud_score=true&api_key=${key}`;
 
-//     <div>
-//     </div>
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.url);
+        setImageUrl(res.url);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    fetchResults();
+  }, [props.latitude]);
 
-//   );
-// }
+  return (
+    <div
+      className="nasaWorkPlz"
+      style={{
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    ></div>
+  );
+};
 
-// export default NASA;
+export default NASA;
