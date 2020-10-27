@@ -28,11 +28,11 @@ const Zomato = (props) => {
           setRestNameOne(resturants[0].restaurant.name);
           setRestCuisineOne(resturants[0].restaurant.cuisines);
           setRestNameTwo(resturants[1].restaurant.name);
-          setRestCuisineTwo(resturants[0].restaurant.cuisines);
+          setRestCuisineTwo(resturants[1].restaurant.cuisines);
           setRestNameThree(resturants[2].restaurant.name);
-          setRestCuisineThree(resturants[0].restaurant.cuisines);
+          setRestCuisineThree(resturants[2].restaurant.cuisines);
           setRestNameFour(resturants[3].restaurant.name);
-          setRestCuisineFour(resturants[0].restaurant.cuisines);
+          setRestCuisineFour(resturants[3].restaurant.cuisines);
          });
       
     }
