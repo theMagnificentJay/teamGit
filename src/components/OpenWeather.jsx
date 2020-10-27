@@ -29,7 +29,16 @@ const OpenWeather = (props) => {
   }, []);
 
   return (
-    <div style={{ margin: "auto", padding: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "auto",
+        padding: "10px",
+      }}
+    >
+      <h4>Weather Outside</h4>
       {toggleTwo ? (
         <div
           id="weatherDiv"
@@ -38,12 +47,9 @@ const OpenWeather = (props) => {
             flexDirection: "column",
             alignItems: "center",
             margin: "auto",
-            marginTop: "50px",
             width: "65%",
           }}
         >
-          <h4>Weather Outside</h4>
-          <hr />
           <img
             src={`http://openweathermap.org/img/w/${weatherWeather[0].icon}.png`}
             alt=""
@@ -52,10 +58,19 @@ const OpenWeather = (props) => {
               width: "7em",
             }}
           />
-          <p>Weather in your area is {weatherWeather[0].description}.</p>
-          <p>High of {weatherMain.temp_max}&#176;</p>
-          <p>Low of {weatherMain.temp_min}&#176;</p>
-          <p>Feels like {weatherMain.feels_like}&#176;</p>
+          <p style={{ textAlign: "center" }}>
+            Weather in your area is {weatherWeather[0].description}.
+          </p>
+          <hr />
+          <p>
+            High of <b>{weatherMain.temp_max}&#176;</b>
+          </p>
+          <p>
+            Low of <b>{weatherMain.temp_min}&#176;</b>
+          </p>
+          <p>
+            Feels like <b>{weatherMain.feels_like}&#176;</b>
+          </p>
         </div>
       ) : (
         <></>
