@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 const Zomato = (props) => {
-  const [restOne, setRestOne] = useState("");
-  const [restTwo, setRestTwo] = useState("");
-  const [restThree, setRestThree] = useState("");
+  const [restNameOne, setRestNameOne] = useState("");
+  const [restCuisineOne, setRestCuisineOne] = useState("");
+  const [restNameTwo, setRestNameTwo] = useState("");
+  const [restCuisineTwo, setRestCuisineTwo] = useState("");
+  const [restNameThree, setRestNameThree] = useState("");
+  const [restCuisineThree, setRestCuisineThree] = useState("");
+  const [restNameFour, setRestNameFour] = useState("");
+  const [restCuisineFour, setRestCuisineFour] = useState("");
 
-  const fetchZomato = () => {
-    // TODO:replace lat and lon values with prop values.
+  const fetchZomato = () => {   
     if (props.longitude !== 0 && props.latitude !== 0) {
       fetch(
         `https://developers.zomato.com/api/v2.1/geocode?lat=${props.latitude}&lon=${props.longitude}`,
@@ -20,14 +24,17 @@ const Zomato = (props) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          const resturants = data.nearby_restaurants.slice(0, 3);
-          setRestOne(resturants[0].restaurant.name);
-          setRestTwo(resturants[1].restaurant.name);
-          setRestThree(resturants[2].restaurant.name);
-          // console.log("RestOne", restOne);
-          // console.log("RestTwo", restTwo);
-          // console.log("RestThree", restThree);
-        });
+          const resturants = data.nearby_restaurants.slice(0, 5);
+          setRestNameOne(resturants[0].restaurant.name);
+          setRestCuisineOne(resturants[0].restaurant.cuisines);
+          setRestNameTwo(resturants[1].restaurant.name);
+          setRestCuisineTwo(resturants[0].restaurant.cuisines);
+          setRestNameThree(resturants[2].restaurant.name);
+          setRestCuisineThree(resturants[0].restaurant.cuisines);
+          setRestNameFour(resturants[3].restaurant.name);
+          setRestCuisineFour(resturants[0].restaurant.cuisines);
+         });
+      
     }
   };
 
@@ -45,9 +52,11 @@ const Zomato = (props) => {
       </p>
       <hr />
       <div style={{ fontWeight: "bold" }}>
-        <p>{restOne}</p>
-        <p>{restTwo}</p>
-        <p>{restThree}</p>
+        <p>{restNameOne} ; {restCuisineOne}</p>
+        <p>{restNameTwo} ; {restCuisineTwo}</p>
+        <p>{restNameThree} ; {restCuisineThree}</p>
+        <p>{restNameFour} ; {restCuisineFour}</p>
+       
       </div>
     </div>
   );
