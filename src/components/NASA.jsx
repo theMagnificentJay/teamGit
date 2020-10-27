@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const baseURL = "https://api.nasa.gov/planetary/earth/assets";
 const key = "y3DUrejxMPFNOGtCKPo36l4yaBgHPoNb8kInsRLw";
+const cloud = "&cloud_score=true";
 
 const NASA = (props) => {
   console.log(props.longitude);
@@ -9,19 +10,20 @@ const NASA = (props) => {
   const [imageUrl, setImageUrl] = useState("");
 
   const fetchResults = () => {
-    let url = `${baseURL}?lon=${props.longitude}&lat=${props.latitude}&cloud_score=true&api_key=${key}`;
+    let url = `${baseURL}?lon=${props.longitude}&lat=${props.latitude}&dim=.32${cloud}&api_key=${key}`;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.url);
-        setImageUrl(res.url);
-      })
-      .catch((err) => console.log(err));
+      fetch(url)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res.url);
+          setImageUrl(res.url);
+        })
+        .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     fetchResults();
-  }, [props.latitude]);
+  }, [props.longitude]);
 
   return (
     <div
@@ -29,8 +31,11 @@ const NASA = (props) => {
       style={{
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
+        height: "100%",
+        width: "",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        overflow: "hidden",
       }}
     ></div>
   );
