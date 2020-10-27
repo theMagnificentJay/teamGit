@@ -23,7 +23,6 @@ code {
 
 .mainContainer {
   z-index: 1;
-  /* padding: 10px; */
   margin: auto;
   border: 2px solid green;
   background-color: green;
