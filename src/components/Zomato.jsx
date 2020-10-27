@@ -24,7 +24,8 @@ const Zomato = (props) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          const resturants = data.nearby_restaurants.slice(0, 5);
+          const resturants = data.nearby_restaurants/*.slice(0, 4)*/;
+          console.log(resturants)
           setRestNameOne(resturants[0].restaurant.name);
           setRestCuisineOne(resturants[0].restaurant.cuisines);
           setRestNameTwo(resturants[1].restaurant.name);
@@ -33,9 +34,9 @@ const Zomato = (props) => {
           setRestCuisineThree(resturants[2].restaurant.cuisines);
           setRestNameFour(resturants[3].restaurant.name);
           setRestCuisineFour(resturants[3].restaurant.cuisines);
-         });
-      
-    }
+         }
+         );
+      }
   };
 
   useEffect(() => {
