@@ -36,7 +36,7 @@ const Zomato = (props) => {
   });
 
   return (
-    <div style={{margin:"auto", padding:"10px"}}>
+    <div style={{ margin: "auto", padding: "10px" }}>
       <h4>Food Near You</h4>
       <hr />
       <p>
@@ -44,7 +44,7 @@ const Zomato = (props) => {
         current location.
       </p>
       <hr />
-      <div style={{fontWeight:"bold"}}>
+      <div style={{ fontWeight: "bold" }}>
         <p>{restOne}</p>
         <p>{restTwo}</p>
         <p>{restThree}</p>
