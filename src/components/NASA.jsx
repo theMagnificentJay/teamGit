@@ -5,10 +5,11 @@ const key = "y3DUrejxMPFNOGtCKPo36l4yaBgHPoNb8kInsRLw";
 const cloud = "&cloud_score=true";
 
 const NASA = (props) => {
-  if (props.longitude !== 0 && props.latitude !== 0) {
-    console.log(props.longitude);
-    console.log(props.latitude);
-  }
+  // console.log for props lon and lat that only display in console after each value is !== 0.
+  // if (props.longitude !== 0 && props.latitude !== 0) {
+  //   console.log(props.longitude);
+  //   console.log(props.latitude);
+  // }
   const [imageUrl, setImageUrl] = useState("");
 
   const fetchResults = () => {
@@ -17,9 +18,10 @@ const NASA = (props) => {
       fetch(url)
         .then((res) => res.json())
         .then((res) => {
-          if (props.longitude !== 0 && props.latitude !== 0) {
-            console.log(res.url);
-          }
+          // console.log for img url that only display in console after lon and lat values are !== 0.
+          // if (props.longitude !== 0 && props.latitude !== 0) {
+          //   console.log(res.url);
+          // }
           setImageUrl(res.url);
         })
         .catch((err) => console.log(err));
