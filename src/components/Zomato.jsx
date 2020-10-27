@@ -1,55 +1,65 @@
-import React, { useState, useEffect } from 'react';
-//import {Card, CardText, CardBody} from 'reactstrap';
+import React, { useState, useEffect } from "react";
 
 const Zomato = (props) => {
-  const [restOne, setRestOne]=useState('');
-  const [restTwo, setRestTwo]=useState('');
-  const [restThree, setRestThree]=useState('');
-  const [restFour, setRestFour]=useState('');
-  const [restFive, setRestFive]=useState('');
+  const [restNameOne, setRestNameOne] = useState("");
+  const [restCuisineOne, setRestCuisineOne] = useState("");
+  const [restNameTwo, setRestNameTwo] = useState("");
+  const [restCuisineTwo, setRestCuisineTwo] = useState("");
+  const [restNameThree, setRestNameThree] = useState("");
+  const [restCuisineThree, setRestCuisineThree] = useState("");
+  const [restNameFour, setRestNameFour] = useState("");
+  const [restCuisineFour, setRestCuisineFour] = useState("");
 
-  const fetchZomato = () => {
-   // TODO:replace lat and lon values with prop values.
-    fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=39.688699&lon=-86.06519`, {
-    method: 'GET',
-    headers: new Headers ({
-      'Accept': 'application/json',
-      'user-key': 'cdaccae4e26b9c93178bb638864824b4'  
-    })
-  }).then( (res) => res.json())
-  .then((data) => {
-    const resturants = data.nearby_restaurants.slice(0 ,5)
-    //console.log(resturants[0]); 
-    setRestOne(resturants[0].restaurant.name, );
-    setRestTwo(resturants[1].restaurant.name);
-    setRestThree(resturants[2].restaurant.name); 
-    setRestFour(resturants[3].restaurant.name); 
-    setRestFive(resturants[4].restaurant.name); 
-    //console.log("Rest1:",restOne)
-    //console.log("Rest2:",restTwo)
-    //console.log("Rest3:",restThree)
-    //console.log("Rest4:",restFour)
-    //console.log("Rest5:",restFive)
- })  
- 
-}
-useEffect(() => {
-  fetchZomato();
-}, [])
-  
-  return (
-    <div>
-      <ul>
-        <li>{restOne}</li>
-        <li>{restTwo}</li>
-        <li>{restThree}</li>
-        <li>{restFour}</li>
-        <li>{restFive}</li>
-      </ul>
+  const fetchZomato = () => {   
+    if (props.longitude !== 0 && props.latitude !== 0) {
+      fetch(
+        `https://developers.zomato.com/api/v2.1/geocode?lat=${props.latitude}&lon=${props.longitude}`,
+        {
+          method: "GET",
+          headers: new Headers({
+            Accept: "application/json",
+            "user-key": "cdaccae4e26b9c93178bb638864824b4",
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const resturants = data.nearby_restaurants.slice(0, 5);
+          setRestNameOne(resturants[0].restaurant.name);
+          setRestCuisineOne(resturants[0].restaurant.cuisines);
+          setRestNameTwo(resturants[1].restaurant.name);
+          setRestCuisineTwo(resturants[0].restaurant.cuisines);
+          setRestNameThree(resturants[2].restaurant.name);
+          setRestCuisineThree(resturants[0].restaurant.cuisines);
+          setRestNameFour(resturants[3].restaurant.name);
+          setRestCuisineFour(resturants[0].restaurant.cuisines);
+         });
       
-    </div>
+    }
+  };
 
+  useEffect(() => {
+    fetchZomato();
+  });
+
+  return (
+    <div style={{ margin: "auto", padding: "10px" }}>
+      <h4>Food Near You</h4>
+      <hr />
+      <p>
+        The following restaurants are some of the closest options to your
+        current location.
+      </p>
+      <hr />
+      <div style={{ fontWeight: "bold" }}>
+        <p>{restNameOne} ; {restCuisineOne}</p>
+        <p>{restNameTwo} ; {restCuisineTwo}</p>
+        <p>{restNameThree} ; {restCuisineThree}</p>
+        <p>{restNameFour} ; {restCuisineFour}</p>
+       
+      </div>
+    </div>
   );
-}
+};
 
 export default Zomato;
