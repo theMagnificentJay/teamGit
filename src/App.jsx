@@ -9,6 +9,7 @@ function App() {
   const [longitude, setLongitude] = useState(0);
   const [Toggle, setToggle] = useState(true);
   const [Toggle2, setToggle2] = useState(true);
+  // console.log(imageUrl);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
