@@ -7,7 +7,6 @@ const key = "a12a877a0a838f42d4e91341fbbc0ca3";
 
 const OpenWeather = (props) => {
   const [weatherMain, setWeatherMain] = useState("");
-  // const [weatherSys, setWeatherSys] = useState("");
   const [weatherWeather, setWeatherWeather] = useState("");
   const [toggle, setToggle] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
@@ -21,7 +20,6 @@ const OpenWeather = (props) => {
       .then((res) => {
         // console.log(res);
         setWeatherMain(res.main);
-        // setWeatherSys(res.sys);
         setWeatherWeather(res.weather);
       });
   };
@@ -31,7 +29,16 @@ const OpenWeather = (props) => {
   }, []);
 
   return (
-    <div style={{ margin: "auto", padding: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "auto",
+        padding: "10px",
+      }}
+    >
+      <h4>Weather Outside</h4>
       {toggleTwo ? (
         <div
           id="weatherDiv"
@@ -40,21 +47,30 @@ const OpenWeather = (props) => {
             flexDirection: "column",
             alignItems: "center",
             margin: "auto",
+            width: "65%",
           }}
         >
-          <h4>Weather Outside</h4>
           <img
             src={`http://openweathermap.org/img/w/${weatherWeather[0].icon}.png`}
             alt=""
             style={{
-              height: "5em",
-              width: "5em",
+              height: "7em",
+              width: "7em",
             }}
           />
-          <p>Weather in your area is {weatherWeather[0].description}.</p>
-          <p>High of <b>{weatherMain.temp_max}&#176;</b></p>
-          <p>Low of <b>{weatherMain.temp_min}&#176;</b></p>
-          <p>Feels like <b>{weatherMain.feels_like}&#176;</b></p>
+          <p style={{ textAlign: "center" }}>
+            Weather in your area is {weatherWeather[0].description}.
+          </p>
+          <hr />
+          <p>
+            High of <b>{weatherMain.temp_max}&#176;</b>
+          </p>
+          <p>
+            Low of <b>{weatherMain.temp_min}&#176;</b>
+          </p>
+          <p>
+            Feels like <b>{weatherMain.feels_like}&#176;</b>
+          </p>
         </div>
       ) : (
         <></>
@@ -64,6 +80,8 @@ const OpenWeather = (props) => {
           display: "flex",
           flexDirection: "column",
           margin: "auto",
+          marginTop: "50px",
+          width: "65%",
         }}
       >
         <Button
@@ -71,14 +89,13 @@ const OpenWeather = (props) => {
             e.preventDefault();
             setToggleTwo(true);
             toggle ? setUnit("imperial") : setUnit("metric");
-            // console.log to show current toggle
-            // console.log(toggle, unit);
+            console.log(toggle, unit);
             fetchOpenWeather();
             setToggle(!toggle);
           }}
         >
           {toggleTwo ? (
-            <span>{toggle ? "Metric" : "Imperial"}</span>
+            <span>press for {toggle ? "metric" : "imperial"}</span>
           ) : (
             <span>press for weather</span>
           )}
